@@ -148,6 +148,20 @@ export default function SobreNosotrosPage() {
           </div>
         </section>
 
+        {/* Autor */}
+        <section className="mb-10">
+          <div className="flex items-center gap-4 p-5 rounded-2xl bg-neutral-900/60 border border-white/8">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center flex-shrink-0 text-xl font-black text-white">
+              EB
+            </div>
+            <div>
+              <p className="text-xs text-neutral-500 mb-0.5 uppercase tracking-wider font-semibold">Creado por</p>
+              <p className="text-lg font-bold text-white">Eric Batista</p>
+              <p className="text-xs text-neutral-500 mt-0.5">Diseño, desarrollo y arquitectura</p>
+            </div>
+          </div>
+        </section>
+
         {/* Aviso legal */}
         <section className="p-5 rounded-2xl bg-neutral-900/40 border border-white/6 text-xs text-neutral-600 leading-relaxed mb-8">
           <strong className="text-neutral-500 block mb-1">Aviso legal</strong>

@@ -180,7 +180,9 @@ export default function HomePage() {
             <Link href="/sobre-nosotros" className="hover:text-neutral-400 transition-colors">Acerca de</Link>
             <Link href="/mapa" className="hover:text-neutral-400 transition-colors">Mapa</Link>
             <Link href="/dashboard" className="hover:text-neutral-400 transition-colors">Dashboard</Link>
-            <span>Construido con datos abiertos</span>
+            <span className="text-neutral-500">
+              Hecho por <span className="text-neutral-300 font-medium">Eric Batista</span>
+            </span>
           </div>
         </div>
       </footer>

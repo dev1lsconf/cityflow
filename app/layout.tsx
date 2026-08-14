@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     "calidad del aire",
     "inteligencia urbana",
   ],
-  authors: [{ name: "CityFlow" }],
-  creator: "CityFlow",
-  publisher: "CityFlow",
+  authors: [{ name: "Eric Batista" }],
+  creator: "Eric Batista",
+  publisher: "Eric Batista",
   robots: {
     index: true,
     follow: true,

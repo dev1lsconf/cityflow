@@ -1,10 +1,13 @@
 # CityFlow — Barcelona Urban Intelligence Platform
 
+**Hecho por [Eric Batista](https://github.com/dev1lsconf)**
+
 **Explora Barcelona a través de datos de movilidad, clima, transporte e inteligencia urbana en tiempo real.**
 
 > Plataforma experimental de Smart City construida con Next.js, MapLibre GL JS y fuentes de datos abiertos.
 
 🔗 **Repositorio:** [github.com/dev1lsconf/cityflow](https://github.com/dev1lsconf/cityflow)
+🌐 **Demo en vivo:** [cityflow-barcelona.netlify.app](https://cityflow-barcelona.netlify.app)
 
 ---
 
@@ -617,6 +620,15 @@ La aplicación no requiere autenticación ni datos persistentes de usuario en es
 ## Disclaimer
 
 CityFlow es un proyecto experimental. No está afiliado con el Ayuntamiento de Barcelona, TMB, Bicing, ni ningún organismo oficial. La precisión de los datos depende de fuentes de terceros y puede no reflejar siempre las condiciones en tiempo real. No utilices esta plataforma para servicios de emergencia ni decisiones críticas de seguridad.
+
+---
+
+## Autor
+
+**Eric Batista**
+Diseño, desarrollo y arquitectura de CityFlow.
+
+🔗 [github.com/dev1lsconf](https://github.com/dev1lsconf)
 
 ---
 
