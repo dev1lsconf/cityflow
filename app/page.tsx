@@ -1,43 +1,43 @@
 import Link from "next/link";
-import { Map, BarChart2, Lightbulb, Layers, ArrowRight, Zap, Globe, Activity } from "lucide-react";
+import { Map, BarChart2, Lightbulb, Zap, Globe, Activity, ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 
 const FEATURES = [
   {
     icon: Map,
-    title: "Interactive Map",
-    description: "Explore Barcelona through a live interactive map with multiple data layers — metro, bikes, traffic, weather and more.",
+    title: "Mapa Interactivo",
+    description: "Explora Barcelona con un mapa interactivo en tiempo real con múltiples capas de datos — metro, bicing, tráfico, meteorología y más.",
     color: "text-blue-400",
     bg: "bg-blue-400/10",
   },
   {
     icon: Zap,
-    title: "Live Mobility",
-    description: "Real-time data on Bicing availability, bus routes, metro status and traffic conditions across the city.",
+    title: "Movilidad en Vivo",
+    description: "Disponibilidad de Bicing, rutas de autobús, estado del metro y condiciones de tráfico en toda la ciudad, actualizados al instante.",
     color: "text-amber-400",
     bg: "bg-amber-400/10",
   },
   {
     icon: Activity,
-    title: "Urban Data",
-    description: "Temperature, air quality, precipitation and wind data from open meteorological sources. Always up to date.",
+    title: "Datos Urbanos",
+    description: "Temperatura, calidad del aire, precipitación y viento desde fuentes meteorológicas abiertas. Siempre al día.",
     color: "text-emerald-400",
     bg: "bg-emerald-400/10",
   },
   {
     icon: Lightbulb,
-    title: "Smart Insights",
-    description: "Automatically generated conclusions from available data. Understand patterns, anomalies and city rhythms at a glance.",
+    title: "Inteligencia Urbana",
+    description: "Conclusiones generadas automáticamente a partir de los datos disponibles. Comprende patrones, anomalías y el ritmo de la ciudad.",
     color: "text-purple-400",
     bg: "bg-purple-400/10",
   },
 ];
 
 const STATS = [
-  { value: "10+", label: "Data layers" },
-  { value: "50+", label: "Bicing stations" },
-  { value: "9", label: "Metro lines" },
-  { value: "24/7", label: "Live updates" },
+  { value: "10+", label: "Capas de datos" },
+  { value: "50+", label: "Estaciones Bicing" },
+  { value: "9", label: "Líneas de metro" },
+  { value: "24/7", label: "Actualización en vivo" },
 ];
 
 export default function HomePage() {
@@ -47,7 +47,7 @@ export default function HomePage() {
 
       {/* ── Hero ── */}
       <section className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-20 sm:py-32 text-center relative overflow-hidden">
-        {/* Background glow */}
+        {/* Fondo decorativo */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden>
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-600/5 blur-3xl" />
           <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-cyan-600/4 blur-3xl" />
@@ -56,43 +56,43 @@ export default function HomePage() {
         {/* Badge */}
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 mb-8 relative">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" aria-hidden />
-          Barcelona Urban Intelligence Platform
+          Plataforma de Inteligencia Urbana · Barcelona
         </div>
 
-        {/* Headline */}
+        {/* Titular */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-none mb-6 relative">
-          See Barcelona
+          Mira Barcelona
           <br />
           <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            differently.
+            diferente.
           </span>
         </h1>
 
-        {/* Subheading */}
+        {/* Subtítulo */}
         <p className="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed mb-10 relative">
-          Explore the city through live data, mobility, weather and urban intelligence.
-          CityFlow transforms public data into a real-time window into Barcelona.
+          Explora la ciudad a través de movilidad, meteorología y datos urbanos en tiempo real.
+          CityFlow convierte datos públicos en una ventana en vivo sobre Barcelona.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-3 relative">
           <Link
-            href="/map"
+            href="/mapa"
             className="flex items-center gap-2 px-7 py-3.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-semibold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
           >
             <Map className="w-4 h-4" />
-            Explore Barcelona
+            Explorar Barcelona
           </Link>
           <Link
             href="/dashboard"
             className="flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white/8 hover:bg-white/12 border border-white/10 hover:border-white/20 text-white font-semibold text-sm transition-all duration-200"
           >
             <BarChart2 className="w-4 h-4" />
-            View Dashboard
+            Ver Dashboard
           </Link>
         </div>
 
-        {/* Stats row */}
+        {/* Estadísticas */}
         <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-16 pt-8 border-t border-white/8 w-full max-w-xl relative">
           {STATS.map(({ value, label }) => (
             <div key={label} className="text-center">
@@ -103,14 +103,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Features ── */}
+      {/* ── Características ── */}
       <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 max-w-6xl mx-auto w-full">
         <div className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Everything you need to understand the city
+            Todo lo que necesitas para entender la ciudad
           </h2>
           <p className="text-sm text-neutral-500 max-w-lg mx-auto">
-            Built on open data sources. No login required. Always free.
+            Construido con datos abiertos. Sin registro. Siempre gratuito.
           </p>
         </div>
 
@@ -130,10 +130,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Map preview CTA ── */}
+      {/* ── CTA mapa ── */}
       <section className="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 max-w-6xl mx-auto w-full">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-blue-950/80 to-neutral-900/80 border border-blue-500/15 p-8 sm:p-12">
-          {/* Decorative grid */}
           <div className="absolute inset-0 pointer-events-none opacity-30" aria-hidden>
             <div className="w-full h-full"
               style={{
@@ -147,20 +146,20 @@ export default function HomePage() {
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <Globe className="w-5 h-5 text-blue-400" />
-                <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">Interactive Map</span>
+                <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">Mapa Interactivo</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                Barcelona in real time.
+                Barcelona en tiempo real.
               </h2>
               <p className="text-sm text-neutral-400 max-w-md">
-                Toggle data layers, explore landmarks, check live transit and discover the city from a new perspective.
+                Activa capas de datos, explora monumentos, consulta el transporte en vivo y descubre la ciudad desde una nueva perspectiva.
               </p>
             </div>
             <Link
-              href="/map"
+              href="/mapa"
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-semibold text-sm transition-all duration-200 hover:scale-[1.02] flex-shrink-0"
             >
-              Open Map
+              Abrir Mapa
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -175,13 +174,13 @@ export default function HomePage() {
               <Map className="w-3 h-3 text-white" />
             </div>
             <span className="text-sm font-bold text-white">CityFlow</span>
-            <span className="text-xs text-neutral-600">Barcelona Urban Intelligence</span>
+            <span className="text-xs text-neutral-600">Inteligencia Urbana Barcelona</span>
           </div>
           <div className="flex items-center gap-4 text-xs text-neutral-600">
-            <Link href="/about" className="hover:text-neutral-400 transition-colors">About</Link>
-            <Link href="/map" className="hover:text-neutral-400 transition-colors">Map</Link>
+            <Link href="/sobre-nosotros" className="hover:text-neutral-400 transition-colors">Acerca de</Link>
+            <Link href="/mapa" className="hover:text-neutral-400 transition-colors">Mapa</Link>
             <Link href="/dashboard" className="hover:text-neutral-400 transition-colors">Dashboard</Link>
-            <span>Built with open data</span>
+            <span>Construido con datos abiertos</span>
           </div>
         </div>
       </footer>

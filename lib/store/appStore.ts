@@ -13,23 +13,23 @@ import type {
 // ─── Layer Definitions ─────────────────────────────────────────────────────────
 
 const DEFAULT_LAYERS: Layer[] = [
-  // Mobility
+  // Movilidad
   { id: "metro", name: "Metro", category: "mobility", icon: "🚇", color: "#d52b1e", enabled: true },
-  { id: "bus", name: "Bus", category: "mobility", icon: "🚌", color: "#f9a51b", enabled: false },
+  { id: "bus", name: "Autobús", category: "mobility", icon: "🚌", color: "#f9a51b", enabled: false },
   { id: "bicing", name: "Bicing", category: "mobility", icon: "🚲", color: "#e91e63", enabled: true },
-  { id: "traffic", name: "Traffic", category: "mobility", icon: "🚗", color: "#ff5722", enabled: false },
-  { id: "parking", name: "Parking", category: "mobility", icon: "🅿", color: "#2196f3", enabled: false },
-  // City
-  { id: "places", name: "Places", category: "city", icon: "🏛", color: "#9c27b0", enabled: true },
-  { id: "events", name: "Events", category: "city", icon: "🎭", color: "#673ab7", enabled: false },
-  { id: "hospitals", name: "Hospitals", category: "city", icon: "🏥", color: "#f44336", enabled: false },
-  { id: "education", name: "Education", category: "city", icon: "🏫", color: "#3f51b5", enabled: false },
-  { id: "parks", name: "Parks", category: "city", icon: "🌳", color: "#4caf50", enabled: false },
-  // Environment
-  { id: "temperature", name: "Temperature", category: "environment", icon: "🌡", color: "#ff9800", enabled: false },
-  { id: "rain", name: "Rain", category: "environment", icon: "🌧", color: "#03a9f4", enabled: false },
-  { id: "wind", name: "Wind", category: "environment", icon: "🌬", color: "#b2ebf2", enabled: false },
-  { id: "air_quality", name: "Air Quality", category: "environment", icon: "🌫", color: "#8bc34a", enabled: false },
+  { id: "traffic", name: "Tráfico", category: "mobility", icon: "🚗", color: "#ff5722", enabled: false },
+  { id: "parking", name: "Aparcamiento", category: "mobility", icon: "🅿", color: "#2196f3", enabled: false },
+  // Ciudad
+  { id: "places", name: "Lugares", category: "city", icon: "🏛", color: "#9c27b0", enabled: true },
+  { id: "events", name: "Eventos", category: "city", icon: "🎭", color: "#673ab7", enabled: false },
+  { id: "hospitals", name: "Hospitales", category: "city", icon: "🏥", color: "#f44336", enabled: false },
+  { id: "education", name: "Educación", category: "city", icon: "🏫", color: "#3f51b5", enabled: false },
+  { id: "parks", name: "Parques", category: "city", icon: "🌳", color: "#4caf50", enabled: false },
+  // Entorno
+  { id: "temperature", name: "Temperatura", category: "environment", icon: "🌡", color: "#ff9800", enabled: false },
+  { id: "rain", name: "Lluvia", category: "environment", icon: "🌧", color: "#03a9f4", enabled: false },
+  { id: "wind", name: "Viento", category: "environment", icon: "🌬", color: "#b2ebf2", enabled: false },
+  { id: "air_quality", name: "Calidad del Aire", category: "environment", icon: "🌫", color: "#8bc34a", enabled: false },
 ];
 
 // ─── App Store ────────────────────────────────────────────────────────────────

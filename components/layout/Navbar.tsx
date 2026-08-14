@@ -7,10 +7,10 @@ import { Menu, X, Map, BarChart2, Compass, Lightbulb, Info } from "lucide-react"
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { href: "/map", label: "Explore", icon: Compass },
+  { href: "/mapa", label: "Explorar", icon: Compass },
   { href: "/dashboard", label: "Dashboard", icon: BarChart2 },
-  { href: "/explore", label: "Discover", icon: Lightbulb },
-  { href: "/about", label: "About", icon: Info },
+  { href: "/descubrir", label: "Descubrir", icon: Lightbulb },
+  { href: "/sobre-nosotros", label: "Acerca de", icon: Info },
 ];
 
 interface NavbarProps {
@@ -33,13 +33,13 @@ export function Navbar({ showSearch = false, transparent = false }: NavbarProps)
             ? "bg-transparent"
             : "bg-neutral-950/90 backdrop-blur-xl"
         )}
-        aria-label="Main navigation"
+        aria-label="Navegación principal"
       >
         {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-2 mr-2 flex-shrink-0 group"
-          aria-label="CityFlow home"
+          aria-label="Inicio CityFlow"
         >
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center group-hover:scale-105 transition-transform">
             <Map className="w-4 h-4 text-white" />
@@ -49,7 +49,7 @@ export function Navbar({ showSearch = false, transparent = false }: NavbarProps)
           </span>
         </Link>
 
-        {/* Desktop nav */}
+        {/* Navegación desktop */}
         <div className="hidden md:flex items-center gap-1 flex-1">
           {NAV_ITEMS.map(({ href, label }) => (
             <Link
@@ -68,21 +68,21 @@ export function Navbar({ showSearch = false, transparent = false }: NavbarProps)
           ))}
         </div>
 
-        {/* Right side */}
+        {/* Derecha */}
         <div className="ml-auto flex items-center gap-2">
           {!showSearch && (
             <Link
-              href="/map"
+              href="/mapa"
               className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold transition-colors"
             >
               <Map className="w-3.5 h-3.5" />
-              Open Map
+              Abrir Mapa
             </Link>
           )}
           <button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-neutral-400 hover:text-white"
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -90,7 +90,7 @@ export function Navbar({ showSearch = false, transparent = false }: NavbarProps)
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Menú móvil */}
       {isMobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-30 bg-neutral-950/98 backdrop-blur-xl pt-14 flex flex-col">
           <div className="flex flex-col p-4 gap-1">
@@ -112,12 +112,12 @@ export function Navbar({ showSearch = false, transparent = false }: NavbarProps)
             ))}
             <div className="mt-4">
               <Link
-                href="/map"
+                href="/mapa"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold transition-colors"
               >
                 <Map className="w-4 h-4" />
-                Open Map
+                Abrir Mapa
               </Link>
             </div>
           </div>

@@ -375,7 +375,7 @@ export default function MapView() {
     <div
       ref={mapContainer}
       className="absolute inset-0 w-full h-full"
-      aria-label="Interactive map of Barcelona"
+      aria-label="Mapa interactivo de Barcelona"
       role="application"
     />
   );

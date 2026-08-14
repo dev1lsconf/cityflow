@@ -8,14 +8,13 @@ import {
   Bike,
   Train,
   Thermometer,
-  ExternalLink,
-  Clock,
   Globe,
+  Clock,
 } from "lucide-react";
 import { cn, formatDistance, haversineDistance } from "@/lib/utils";
 import { useAppStore } from "@/lib/store/appStore";
 import { useBicingStations, useWeather } from "@/lib/hooks/useData";
-import type { Place, MetroStation, BicingStation } from "@/types";
+import type { Place, MetroStation } from "@/types";
 import { DEMO_METRO_STATIONS } from "@/lib/data/demo";
 
 function FeatureTag({ label }: { label: string }) {
@@ -40,11 +39,28 @@ function InfoRow({ icon, label, value }: { icon: React.ReactNode; label: string;
   );
 }
 
+const CATEGORY_ES: Record<string, string> = {
+  landmark: "Monumento",
+  museum: "Museo",
+  park: "Parque",
+  restaurant: "Restaurante",
+  shopping: "Compras",
+  hospital: "Hospital",
+  school: "Educación",
+  hotel: "Hotel",
+  beach: "Playa",
+  sports: "Deportes",
+  nightlife: "Ocio nocturno",
+  culture: "Cultura",
+  food: "Gastronomía",
+  nature: "Naturaleza",
+  architecture: "Arquitectura",
+};
+
 function PlacePanel({ place }: { place: Place }) {
   const { data: bicingData } = useBicingStations();
   const { data: weatherData } = useWeather();
 
-  // Find nearby bicing stations
   const nearbyBicing = bicingData?.stations
     ?.map((station) => ({
       ...station,
@@ -59,7 +75,6 @@ function PlacePanel({ place }: { place: Place }) {
     .sort((a, b) => a.distance - b.distance)
     .slice(0, 3) ?? [];
 
-  // Find nearby metro stations
   const nearbyMetro = DEMO_METRO_STATIONS
     .map((station) => ({
       ...station,
@@ -74,11 +89,10 @@ function PlacePanel({ place }: { place: Place }) {
     .sort((a, b) => a.distance - b.distance)
     .slice(0, 2);
 
-  const categoryLabel = place.category.charAt(0).toUpperCase() + place.category.slice(1);
+  const categoryLabel = CATEGORY_ES[place.category] ?? place.category;
 
   return (
     <div className="space-y-5">
-      {/* Header */}
       <div>
         <div className="flex items-center gap-2 mb-1">
           <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
@@ -97,7 +111,6 @@ function PlacePanel({ place }: { place: Place }) {
         )}
       </div>
 
-      {/* Tags */}
       {place.tags && place.tags.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
           {place.tags.map((tag) => (
@@ -106,39 +119,35 @@ function PlacePanel({ place }: { place: Place }) {
         </div>
       )}
 
-      {/* Info rows */}
       <div className="space-y-3">
         {place.address && (
           <InfoRow
             icon={<MapPin className="w-3.5 h-3.5 text-neutral-400" />}
-            label="Address"
+            label="Dirección"
             value={place.address}
           />
         )}
         {place.openingHours && (
           <InfoRow
             icon={<Clock className="w-3.5 h-3.5 text-neutral-400" />}
-            label="Opening Hours"
+            label="Horario"
             value={place.openingHours}
           />
         )}
         {weatherData && (
           <InfoRow
             icon={<Thermometer className="w-3.5 h-3.5 text-orange-400" />}
-            label="Temperature"
+            label="Temperatura"
             value={`${weatherData.temperature}°C — ${weatherData.description}`}
           />
         )}
       </div>
 
-      {/* Separator */}
       <div className="border-t border-white/8" />
 
-      {/* Nearby */}
       <div>
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">Nearby</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">Transporte cercano</h3>
         <div className="space-y-2">
-          {/* Metro */}
           {nearbyMetro.length > 0 && nearbyMetro.map((station) => (
             <div
               key={station.id}
@@ -150,18 +159,13 @@ function PlacePanel({ place }: { place: Place }) {
                 </div>
                 <div>
                   <div className="text-sm text-white font-medium">{station.name}</div>
-                  <div className="text-xs text-neutral-500">
-                    Metro {station.lines.join(", ")}
-                  </div>
+                  <div className="text-xs text-neutral-500">Metro {station.lines.join(", ")}</div>
                 </div>
               </div>
-              <span className="text-xs text-neutral-500 font-medium">
-                {formatDistance(station.distance)}
-              </span>
+              <span className="text-xs text-neutral-500 font-medium">{formatDistance(station.distance)}</span>
             </div>
           ))}
 
-          {/* Bicing */}
           {nearbyBicing.length > 0 && nearbyBicing.map((station) => (
             <div
               key={station.id}
@@ -173,34 +177,31 @@ function PlacePanel({ place }: { place: Place }) {
                 </div>
                 <div>
                   <div className="text-sm text-white font-medium">
-                    {station.availableBikes + station.availableElectricBikes} bikes
+                    {station.availableBikes + station.availableElectricBikes} bicis disponibles
                   </div>
                   <div className="text-xs text-neutral-500">{station.name}</div>
                 </div>
               </div>
-              <span className="text-xs text-neutral-500 font-medium">
-                {formatDistance(station.distance)}
-              </span>
+              <span className="text-xs text-neutral-500 font-medium">{formatDistance(station.distance)}</span>
             </div>
           ))}
 
           {nearbyMetro.length === 0 && nearbyBicing.length === 0 && (
-            <p className="text-sm text-neutral-600 text-center py-2">No nearby transit data</p>
+            <p className="text-sm text-neutral-600 text-center py-2">Sin datos de transporte cercano</p>
           )}
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex gap-2">
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${place.coordinates.lat},${place.coordinates.lng}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/8 hover:bg-white/12 border border-white/10 text-sm text-white font-medium transition-colors"
-          aria-label={`Open ${place.name} in Google Maps`}
+          aria-label={`Cómo llegar a ${place.name}`}
         >
           <Navigation className="w-4 h-4" />
-          Directions
+          Cómo llegar
         </a>
         {place.website && (
           <a
@@ -208,7 +209,7 @@ function PlacePanel({ place }: { place: Place }) {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/8 hover:bg-white/12 border border-white/10 text-sm text-white font-medium transition-colors"
-            aria-label={`Visit ${place.name} website`}
+            aria-label={`Web oficial de ${place.name}`}
           >
             <Globe className="w-4 h-4" />
           </a>
@@ -223,7 +224,7 @@ function MetroStationPanel({ station }: { station: MetroStation }) {
     <div className="space-y-5">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Metro Station</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Estación de Metro</span>
           {station.district && (
             <>
               <span className="text-neutral-700">·</span>
@@ -247,7 +248,7 @@ function MetroStationPanel({ station }: { station: MetroStation }) {
 
       <InfoRow
         icon={<MapPin className="w-3.5 h-3.5 text-neutral-400" />}
-        label="District"
+        label="Distrito"
         value={station.district}
       />
 
@@ -258,24 +259,20 @@ function MetroStationPanel({ station }: { station: MetroStation }) {
         className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-white/8 hover:bg-white/12 border border-white/10 text-sm text-white font-medium transition-colors"
       >
         <Navigation className="w-4 h-4" />
-        Get Directions
+        Cómo llegar
       </a>
     </div>
   );
 }
 
-// ─── Main Info Panel ──────────────────────────────────────────────────────────
-
 export function InfoPanel() {
   const { selectedFeature, isInfoPanelOpen, setInfoPanelOpen, setSelectedFeature } = useAppStore();
-  const panelRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
     setInfoPanelOpen(false);
     setTimeout(() => setSelectedFeature(null), 300);
   };
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isInfoPanelOpen) handleClose();
@@ -289,9 +286,8 @@ export function InfoPanel() {
 
   return (
     <>
-      {/* Desktop side panel */}
+      {/* Panel lateral desktop */}
       <div
-        ref={panelRef}
         className={cn(
           "hidden md:flex flex-col absolute right-0 top-0 bottom-0 w-80 lg:w-96",
           "bg-neutral-950/95 backdrop-blur-xl border-l border-white/8",
@@ -299,23 +295,21 @@ export function InfoPanel() {
           isInfoPanelOpen ? "translate-x-0" : "translate-x-full"
         )}
         role="complementary"
-        aria-label="Location details"
+        aria-label="Detalles del lugar"
       >
-        {/* Panel header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/8 flex-shrink-0">
           <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-            {selectedFeature.type === "station" ? "Station" : "Location"}
+            {selectedFeature.type === "station" ? "Estación" : "Ubicación"}
           </span>
           <button
             onClick={handleClose}
             className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-neutral-500 hover:text-white"
-            aria-label="Close panel"
+            aria-label="Cerrar panel"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Panel content */}
         <div className="flex-1 overflow-y-auto p-5 scrollbar-thin">
           {selectedFeature.type === "place" && (
             <PlacePanel place={selectedFeature.data as Place} />
@@ -326,7 +320,7 @@ export function InfoPanel() {
         </div>
       </div>
 
-      {/* Mobile bottom sheet */}
+      {/* Bottom sheet móvil */}
       <div
         className={cn(
           "md:hidden fixed inset-x-0 bottom-0 z-50",
@@ -337,28 +331,25 @@ export function InfoPanel() {
         )}
         role="dialog"
         aria-modal="true"
-        aria-label="Location details"
+        aria-label="Detalles del lugar"
       >
-        {/* Handle */}
         <div className="flex justify-center py-3 flex-shrink-0">
           <div className="w-10 h-1 rounded-full bg-white/20" />
         </div>
 
-        {/* Header */}
         <div className="flex items-center justify-between px-5 pb-3 border-b border-white/8 flex-shrink-0">
           <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-            {selectedFeature.type === "station" ? "Station" : "Location"}
+            {selectedFeature.type === "station" ? "Estación" : "Ubicación"}
           </span>
           <button
             onClick={handleClose}
             className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-neutral-500 hover:text-white"
-            aria-label="Close"
+            aria-label="Cerrar"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Content */}
         <div className="flex-1 overflow-y-auto p-5 scrollbar-thin">
           {selectedFeature.type === "place" && (
             <PlacePanel place={selectedFeature.data as Place} />
@@ -369,7 +360,6 @@ export function InfoPanel() {
         </div>
       </div>
 
-      {/* Mobile backdrop */}
       {isInfoPanelOpen && (
         <div
           className="md:hidden fixed inset-0 bg-black/40 z-40 backdrop-blur-sm"

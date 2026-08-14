@@ -2,7 +2,7 @@
 
 import { useAppStore } from "@/lib/store/appStore";
 import { useLiveData } from "@/lib/hooks/useData";
-import { cn, getStatusDotClass, getAQIBadgeClass, getTrafficLabel } from "@/lib/utils";
+import { cn, getTrafficLabel } from "@/lib/utils";
 import { formatTimeAgo } from "@/lib/utils";
 import { Wifi, WifiOff, RefreshCw } from "lucide-react";
 
@@ -16,14 +16,12 @@ function DataItem({
   value,
   unit,
   isLoading = false,
-  status,
 }: {
   icon: string;
   label: string;
   value: string | number;
   unit?: string;
   isLoading?: boolean;
-  status?: "live" | "demo" | "cached" | "error" | "loading" | "offline";
 }) {
   return (
     <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors flex-shrink-0">
@@ -63,9 +61,9 @@ export function LiveDataBar() {
     <div
       className="flex items-center gap-0 overflow-x-auto scrollbar-none"
       role="region"
-      aria-label="Live city data"
+      aria-label="Datos urbanos en tiempo real"
     >
-      {/* Live indicator */}
+      {/* Indicador en vivo */}
       <div className="flex items-center gap-1.5 px-3 py-2 flex-shrink-0">
         {isLoading ? (
           <RefreshCw className="w-3 h-3 text-neutral-500 animate-spin" />
@@ -80,7 +78,7 @@ export function LiveDataBar() {
             hasAnyLive ? "text-emerald-400" : "text-sky-400"
           )}
         >
-          {isLoading ? "Loading" : hasAnyLive ? "Live" : "Demo"}
+          {isLoading ? "Cargando" : hasAnyLive ? "En vivo" : "Demo"}
         </span>
         {!isLoading && (
           <span
@@ -95,36 +93,33 @@ export function LiveDataBar() {
 
       <Separator />
 
-      {/* Temperature */}
+      {/* Temperatura */}
       <DataItem
         icon={weatherData?.icon ?? "🌡"}
         label="Barcelona"
         value={weatherData?.temperature !== undefined ? `${weatherData.temperature}°C` : "—"}
         isLoading={isLoading && !weatherData}
-        status={weatherData?.status}
       />
 
-      {/* Weather description */}
+      {/* Descripción del tiempo */}
       {weatherData?.description && (
         <>
           <Separator />
           <DataItem
             icon="🌤"
-            label="Weather"
+            label="Tiempo"
             value={weatherData.description}
-            status={weatherData?.status}
           />
         </>
       )}
 
       <Separator />
 
-      {/* Traffic */}
+      {/* Tráfico */}
       <DataItem
         icon="🚗"
-        label="Traffic"
+        label="Tráfico"
         value={liveData.traffic ? getTrafficLabel(liveData.traffic.level) : "Normal"}
-        status="demo"
       />
 
       <Separator />
@@ -133,16 +128,15 @@ export function LiveDataBar() {
       <DataItem
         icon="🚇"
         label="Metro"
-        value="Running"
-        status="demo"
+        value="Circulando"
       />
 
       <Separator />
 
-      {/* Bikes */}
+      {/* Bicis */}
       <DataItem
         icon="🚲"
-        label="Bikes"
+        label="Bicis"
         value={
           bicingData?.stations
             ? bicingData.stations.reduce(
@@ -152,52 +146,56 @@ export function LiveDataBar() {
             : "—"
         }
         isLoading={isLoading && !bicingData}
-        status={bicingData?.status}
       />
 
       <Separator />
 
-      {/* Air Quality */}
+      {/* Calidad del aire */}
       <DataItem
         icon="🌿"
-        label="Air Quality"
-        value={airData ? airData.level.charAt(0).toUpperCase() + airData.level.slice(1).replace("_", " ") : "—"}
+        label="Calidad Aire"
+        value={
+          airData
+            ? airData.level === "good" ? "Buena"
+            : airData.level === "fair" ? "Aceptable"
+            : airData.level === "moderate" ? "Moderada"
+            : airData.level === "poor" ? "Mala"
+            : "Muy mala"
+            : "—"
+        }
         isLoading={isLoading && !airData}
-        status={airData?.status}
       />
 
-      {/* Humidity */}
+      {/* Humedad */}
       {weatherData?.humidity !== undefined && (
         <>
           <Separator />
           <DataItem
             icon="💧"
-            label="Humidity"
+            label="Humedad"
             value={`${weatherData.humidity}%`}
-            status={weatherData?.status}
           />
         </>
       )}
 
-      {/* Wind */}
+      {/* Viento */}
       {weatherData?.windSpeed !== undefined && (
         <>
           <Separator />
           <DataItem
             icon="🌬"
-            label="Wind"
+            label="Viento"
             value={`${weatherData.windSpeed}`}
             unit="km/h"
-            status={weatherData?.status}
           />
         </>
       )}
 
-      {/* Last updated */}
+      {/* Última actualización */}
       {lastUpdated && (
         <div className="flex items-center gap-1 px-3 py-2 flex-shrink-0 ml-auto">
           <span className="text-xs text-neutral-600">
-            Updated {formatTimeAgo(lastUpdated)}
+            Actualizado {formatTimeAgo(lastUpdated)}
           </span>
         </div>
       )}

@@ -176,7 +176,7 @@ export function SearchBar({ className, placeholder = "Search Barcelona..." }: Se
           onFocus={() => setIsOpen(true)}
           placeholder={placeholder}
           className="flex-1 bg-transparent text-sm text-white placeholder-neutral-500 outline-none min-w-0"
-          aria-label="Search Barcelona"
+          aria-label="Buscar en Barcelona"
           aria-autocomplete="list"
           aria-expanded={isOpen && suggestions.length > 0}
           role="combobox"
@@ -197,11 +197,11 @@ export function SearchBar({ className, placeholder = "Search Barcelona..." }: Se
         <div
           className="absolute top-full left-0 right-0 mt-1 bg-neutral-950/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50"
           role="listbox"
-          aria-label="Search suggestions"
+          aria-label="Sugerencias de búsqueda"
         >
           {inputValue.length === 0 && (
             <div className="px-3 py-2 border-b border-white/8">
-              <span className="text-xs text-neutral-500 font-medium uppercase tracking-wider">Popular places</span>
+              <span className="text-xs text-neutral-500 font-medium uppercase tracking-wider">Lugares populares</span>
             </div>
           )}
 
@@ -233,8 +233,8 @@ export function SearchBar({ className, placeholder = "Search Barcelona..." }: Se
 
           {suggestions.length === 0 && inputValue.length > 0 && !isLoading && (
             <div className="px-3 py-4 text-center">
-              <p className="text-sm text-neutral-500">No results found for &ldquo;{inputValue}&rdquo;</p>
-              <p className="text-xs text-neutral-600 mt-1">Try a different search term</p>
+              <p className="text-sm text-neutral-500">Sin resultados para &ldquo;{inputValue}&rdquo;</p>
+              <p className="text-xs text-neutral-600 mt-1">Prueba con otro término de búsqueda</p>
             </div>
           )}
         </div>

@@ -79,11 +79,11 @@ export function getTrafficColor(level: string): string {
 
 export function getTrafficLabel(level: string): string {
   switch (level) {
-    case "fluid": return "Fluid";
-    case "dense": return "Dense";
-    case "congested": return "Congested";
-    case "stopped": return "Stopped";
-    default: return "Unknown";
+    case "fluid": return "Fluido";
+    case "dense": return "Denso";
+    case "congested": return "Congestionado";
+    case "stopped": return "Detenido";
+    default: return "Desconocido";
   }
 }
 
@@ -113,12 +113,12 @@ export function formatTime(date: Date | null): string {
 }
 
 export function formatTimeAgo(date: Date | null): string {
-  if (!date) return "never";
+  if (!date) return "nunca";
   const diffSeconds = Math.floor((Date.now() - date.getTime()) / 1000);
-  if (diffSeconds < 60) return "just now";
-  if (diffSeconds < 3600) return `${Math.floor(diffSeconds / 60)}m ago`;
-  if (diffSeconds < 86400) return `${Math.floor(diffSeconds / 3600)}h ago`;
-  return `${Math.floor(diffSeconds / 86400)}d ago`;
+  if (diffSeconds < 60) return "ahora mismo";
+  if (diffSeconds < 3600) return `hace ${Math.floor(diffSeconds / 60)} min`;
+  if (diffSeconds < 86400) return `hace ${Math.floor(diffSeconds / 3600)} h`;
+  return `hace ${Math.floor(diffSeconds / 86400)} días`;
 }
 
 // ─── Debounce ─────────────────────────────────────────────────────────────────

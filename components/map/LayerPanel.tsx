@@ -7,9 +7,9 @@ import { ChevronDown, ChevronRight, X, Layers } from "lucide-react";
 import { useState } from "react";
 
 const CATEGORY_LABELS: Record<LayerCategory, string> = {
-  mobility: "Mobility",
-  city: "City",
-  environment: "Environment",
+  mobility: "Movilidad",
+  city: "Ciudad",
+  environment: "Entorno",
 };
 
 const CATEGORY_ICONS: Record<LayerCategory, string> = {
@@ -29,14 +29,12 @@ function LayerToggle({ layer, onToggle }: { layer: Layer; onToggle: () => void }
           : "hover:bg-white/5"
       )}
       aria-pressed={layer.enabled}
-      aria-label={`${layer.enabled ? "Disable" : "Enable"} ${layer.name} layer`}
+      aria-label={`${layer.enabled ? "Desactivar" : "Activar"} capa ${layer.name}`}
     >
-      {/* Icon */}
       <span className="text-base w-5 text-center flex-shrink-0 select-none" aria-hidden>
         {layer.icon}
       </span>
 
-      {/* Name */}
       <span
         className={cn(
           "flex-1 text-sm font-medium transition-colors",
@@ -46,7 +44,6 @@ function LayerToggle({ layer, onToggle }: { layer: Layer; onToggle: () => void }
         {layer.name}
       </span>
 
-      {/* Color dot + toggle */}
       <div className="flex items-center gap-2">
         {layer.enabled && (
           <span
@@ -55,7 +52,6 @@ function LayerToggle({ layer, onToggle }: { layer: Layer; onToggle: () => void }
             aria-hidden
           />
         )}
-        {/* Toggle switch */}
         <div
           className={cn(
             "relative w-8 h-4 rounded-full transition-all duration-300 flex-shrink-0",
@@ -148,11 +144,10 @@ export function LayerPanel({ className, onClose }: LayerPanelProps) {
         className
       )}
     >
-      {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/8">
         <div className="flex items-center gap-2">
           <Layers className="w-4 h-4 text-neutral-400" />
-          <span className="text-sm font-semibold text-white">Layers</span>
+          <span className="text-sm font-semibold text-white">Capas</span>
           {totalActive > 0 && (
             <span className="text-xs bg-white/10 text-neutral-300 px-1.5 py-0.5 rounded-full">
               {totalActive}
@@ -163,14 +158,13 @@ export function LayerPanel({ className, onClose }: LayerPanelProps) {
           <button
             onClick={onClose}
             className="w-6 h-6 flex items-center justify-center rounded-md hover:bg-white/10 transition-colors text-neutral-500 hover:text-white"
-            aria-label="Close layer panel"
+            aria-label="Cerrar panel de capas"
           >
             <X className="w-3.5 h-3.5" />
           </button>
         )}
       </div>
 
-      {/* Layer list */}
       <div className="flex-1 overflow-y-auto scrollbar-thin py-3 px-3 space-y-4">
         {(["mobility", "city", "environment"] as LayerCategory[]).map((cat) => (
           <LayerCategoryGroup
@@ -182,10 +176,9 @@ export function LayerPanel({ className, onClose }: LayerPanelProps) {
         ))}
       </div>
 
-      {/* Footer */}
       <div className="px-4 py-3 border-t border-white/8">
         <p className="text-xs text-neutral-600 text-center">
-          {totalActive === 0 ? "No layers active" : `${totalActive} layer${totalActive > 1 ? "s" : ""} active`}
+          {totalActive === 0 ? "Sin capas activas" : `${totalActive} capa${totalActive > 1 ? "s" : ""} activa${totalActive > 1 ? "s" : ""}`}
         </p>
       </div>
     </div>
